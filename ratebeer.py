@@ -48,7 +48,7 @@ conn.text_factory = str
 
 c = conn.cursor()
 
-c.execute("SELECT rowid, * FROM beers");# WHERE rbscore IS NULL OR rbscore = 0")
+c.execute("SELECT rowid, * FROM beers WHERE rbscore IS NULL OR rbscore = 0")
 for row in c.fetchall():
     beerid = row[0]
     breweryid = row[3]

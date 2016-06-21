@@ -45,7 +45,7 @@ Ratebeer einkunnir eru sóttar sjálfvirkt. Það er líklegt að einhverjir bj�
     error_reporting(E_All);
     $dbh = new PDO('sqlite:beer.db');
 
-    foreach($dbh->query("select b.stockid stockid, b.name name, b.price, br.name bname, b.size size, b.abv abv, rbratings, rbscore, rbweighed, rbid, s.name style from beers b LEFT OUTER JOIN breweries br ON b.brewery = br.rowid LEFT OUTER JOIN styles s ON s.rowid = b.rbstyle") as $row)
+    foreach($dbh->query("select b.stockid stockid, b.name name, b.price, br.name bname, b.size size, b.abv abv, rbratings, rbscore, rbweighed, rbid, s.name style from beers b LEFT OUTER JOIN breweries br ON b.brewery = br.rowid LEFT OUTER JOIN styles s ON s.rowid = b.rbstyle WHERE b.enabled = 1") as $row)
     {
         // brewery	stockid	name	price
         echo "<tr><td>{$row['stockid']}</td><td>{$row['bname']}</td><td>{$row['name']}</td><td>{$row['style']}</td><td><a href=\"http://www.ratebeer.com/beer/{$row['rbid']}/\">{$row['rbscore']}</th><th>{$row['rbweighed']}</a></td><td>{$row['rbratings']}</td><td>{$row['abv']}</td><td>{$row['size']}</td><td>{$row['price']}</td></tr>";
@@ -53,6 +53,7 @@ Ratebeer einkunnir eru sóttar sjálfvirkt. Það er líklegt að einhverjir bj�
     ?>
     </tbody>
 </table>
-Hver nennir eiginlega að leita í excel skjali? :)
+Hver nennir eiginlega að leita í excel skjali? :)<br />
+Kóði á <a href="https://github.com/hrafnkell/jg">github</a>.
 </body>
 </html>

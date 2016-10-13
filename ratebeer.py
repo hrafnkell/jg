@@ -33,10 +33,14 @@ def ratebeer(searchstring, beername, breweryname):
     beers = []
     # Build collection of results
     for b in rb:
+        t = b.parent.parent.find_all('td')
         rbid = re.findall('(\d+)', b['href'])[0]
-        rbname = b.parent.previous_sibling('a')[0].text.strip()
-        rbscore = b.parent.next_sibling.next_sibling.text.strip()
-        rbratings = b.parent.next_sibling.next_sibling.next_sibling.text.strip()
+        rbname = t[0].text.strip()
+        #rbname = b.parent.previous_sibling('a')[0].text.strip()
+        rbscore = t[3].text.strip()
+        #rbscore = b.parent.next_sibling.next_sibling.text.strip()
+        rbratings = t[4].text.strip()
+        #rbratings = b.parent.next_sibling.next_sibling.next_sibling.text.strip()
         lev = levenshtein(rbname, "%s %s" % (breweryname, beername))
         beers.append((rbid, rbname, rbscore, rbratings, lev))
     return beers
